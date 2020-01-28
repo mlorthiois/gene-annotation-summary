@@ -1,7 +1,12 @@
-#! /usr/src/env python
+#! /usr/bin/env python
 from src.ensembl import *
 from src.table import *
 from src.uniprot import *
+from src.pfam import *
+from src.prosite import *
+from src.pdb import *
+from src.pfam import *
+from src.string import *
 
 output_file=open("output.html","w")
 gene_file=read_file()
@@ -17,14 +22,12 @@ for line in gene_file:
         ens_orthologs(ens_ID,organism,ens_url,output_file)
     else:
         output_file.write("<td><i>No data found</i></td>"*4)
-    #############################################################################################Uniprot
+    #############################################################################################Proteins
     uniprot_id=uniprot(gene, organism, output_file)
-    if uniprot_id != []:#############################################################################################String
-        string(uniprot_id, output_file)
-    #############################################################################################PDB
-        pdb(uniprot_id, output_file)
-    else:
-        output_file.write("<td><i>No data found</i></td>"*2)
+    string(uniprot_id, output_file)
+    pdb(uniprot_id, output_file)
+    pfam(uniprot_id, output_file)
+    prosite(uniprot_id,output_file)
     #############################################################################################End
     output_file.write("</tr>")
 end_table(output_file)

@@ -12,7 +12,7 @@ def init_table(output_file):
 def init_row(line, output_file):
     colonne=line.split(",")
     gene=colonne[0]
-    organism=colonne[1][:-1]
+    organism=colonne[1].rstrip('\n')
     print("Traitement de {} / {}".format(gene,organism))
     output_file.write("<tr><td>{}</td><td>{}</td>".format(gene, organism))
     return gene, organism

@@ -2,6 +2,7 @@ import requests
 
 ############################################################################################
 def ensembl_db(organism):
+    print("\tEnsembl ...")
     dic = { 'EnsemblBacteria':'bacteria.ensembl.org',"EnsemblFungi":'fungi.ensembl.org',"EnsemblBacteria":'bacteria.ensembl.org',
             'EnsemblVertebrates':'ensembl.org','EnsemblPlants':'plants.ensembl.org'}
     server = "https://rest.ensembl.org"
