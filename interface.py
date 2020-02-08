@@ -1,9 +1,10 @@
-#!/usr/src/env python
 from PIL import ImageTk
 import PIL.Image
 from tkinter import *
 from src.main import main
 from tkinter import filedialog
+import webbrowser
+import os
 
 
 def import_file():
@@ -20,18 +21,25 @@ def execute():
     main(filename, txt)
 
 
+def open_file():
+    webbrowser.open('file://' + os.path.realpath('output.html'))
+
 # Constant
 window = Tk()
 window.title("Gene-Table Generator")
-window.geometry("500x650")
+window.geometry("600x730")
 
 img = PIL.Image.open('img/database.png')
 database = ImageTk.PhotoImage(img.resize((190, 190)))
+
 img = PIL.Image.open('img/file.png')
 fileimport = ImageTk.PhotoImage(img.resize((90, 90)))
 
 img = PIL.Image.open('img/cloud.png')
 cloud = ImageTk.PhotoImage(img.resize((90, 90)))
+
+img = PIL.Image.open('img/open.png')
+open_img = ImageTk.PhotoImage(img.resize((90, 90)))
 
 # Frame
 frame_head = Frame(window)
@@ -43,7 +51,7 @@ copyright_frame = Frame(window)
 # Widgets
 label_title = Label(frame_head,
                     text="Gene Datatable Creator",
-                    font="Helvetica 24 bold",
+                    font="Arial 24 bold",
                     fg="#114d74")
 label_title.pack(pady=15)
 
@@ -54,8 +62,8 @@ canvas.create_image(width/2, height/2, image=database)
 canvas.pack()
 
 label_title = Label(text_frame,
-                    text="File processing:",
-                    font="Helvetica 16")
+                    text="Content of the request:",
+                    font="Arial 16")
 label_title.pack()
 
 button_import = Button(icon_frame,
@@ -75,6 +83,16 @@ button_upload = Button(icon_frame,
                        bd=0)
 button_upload.grid(row=0, column=1, padx=5, pady=5)
 
+button_open = Button(icon_frame,
+                       text='3. Open table',
+                       image=open_img,
+                       command=open_file,
+                       compound=TOP,
+                       highlightthickness=0,
+                       bd=0)
+button_open.grid(row=0, column=2, padx=5, pady=5)
+
+
 txt = Text(text_frame, height=12,
            wrap=WORD,
            fg="#1e1e1e",
@@ -85,7 +103,7 @@ txt.pack(fill=X, padx=20)
 
 foot_text = Label(copyright_frame,
                   text="© Matthias Lorthiois - M1 Bioinformatique - Université Rouen-Normandie",
-                  font="Helvetica 12")
+                  font="Arial 11")
 foot_text.pack()
 
 # Pack
