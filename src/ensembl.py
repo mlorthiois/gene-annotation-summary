@@ -1,7 +1,7 @@
 import requests
 
 
-def ensembl_db(organism):
+def ens_db(organism):
     print("\tEnsembl ...")
     dic = {'EnsemblBacteria': 'bacteria.ensembl.org', "EnsemblFungi": 'fungi.ensembl.org', "EnsemblBacteria": 'bacteria.ensembl.org',
            'EnsemblVertebrates': 'ensembl.org', 'EnsemblPlants': 'plants.ensembl.org'}
@@ -19,7 +19,7 @@ def ensembl_db(organism):
     return ens_url
 
 
-def ensembl_id(gene, organism, output_file, ens_url):
+def ens_id(gene, organism, output_file, ens_url):
     server = "https://rest.ensembl.org"
     ext = "/xrefs/symbol/{}/{}?".format(organism, gene)
     r = requests.get(server+ext, headers={"Content-Type": "application/json"})
@@ -49,7 +49,7 @@ def ensembl_id(gene, organism, output_file, ens_url):
     return ens_ID
 
 
-def ensembl_trans_prot(ens_ID, output_file, ens_url, organism):
+def ens_rna_prot(ens_ID, output_file, ens_url, organism):
     output_file.write('<td><div class="scroll">')
     dic = {}
     server = "https://rest.ensembl.org"

@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from src.ensembl import ensembl_db, ensembl_id, ensembl_trans_prot, ens_orthologs
+from src.ensembl import ens_db, ens_id, ens_rna_prot, ens_orthologs
 from src.table import init_table, init_row, end_table
 from src.uniprot import uniprot
 from src.prosite import prosite
@@ -14,7 +14,7 @@ def statut(txt, line_number, step):
     txt.tag_config("Current", foreground="green")
     txt.insert(cursor, step, ('Current'))
     txt.update()
-    txt.delete("%s.first" % 'Current', "%s.last" % 'Current' )
+    txt.delete("%s.first" % 'Current', "%s.last" % 'Current')
 
 
 def main(filename, txt):
@@ -32,10 +32,10 @@ def main(filename, txt):
         ncbi_prot_id(gene, organism, output_file)
         # Ensembl
         statut(txt, line_number, ' EnsEMBL...',)
-        ens_url = ensembl_db(organism)
+        ens_url = ens_db(organism)
         if ens_url != "0":
-            ens_ID = ensembl_id(gene, organism, output_file, ens_url)
-            ensembl_trans_prot(ens_ID, output_file, ens_url, organism)
+            ens_ID = ens_id(gene, organism, output_file, ens_url)
+            ens_rna_prot(ens_ID, output_file, ens_url, organism)
             ens_orthologs(ens_ID, organism, ens_url, output_file)
         else:
             output_file.write("<td><i>No data found</i></td>"*4)
