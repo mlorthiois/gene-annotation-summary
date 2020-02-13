@@ -1,28 +1,30 @@
 import requests
 import re
-path_id = {}
 
 
-def kegg_id():
+def kegg(ncbi, output_file):
     print('\tKegg ...')
 
-    ncbi = '5888'
     r_url = "http://rest.kegg.jp/conv/genes/ncbi-geneid:{}".format(ncbi)
     r = requests.get(r_url)
-    kegg_id = r.text.rstrip().split('\t')[1]
-    url = "https://www.genome.jp/dbget-bin/www_bget?{}".format(kegg_id)
-    print("<td><a href={}>{}</a></td>".format(url, kegg_id))
+    if len(r.text) != 1:
+        kegg_id = r.text.rstrip().split('\t')[1]
+        organism_id = kegg_id[:3]
+        url = "https://www.genome.jp/dbget-bin/www_bget?{}".format(kegg_id)
+        output_file.write(f"<td>{kegg_id}</td>")
 
-    r_url = "http://rest.kegg.jp/get/{}".format(kegg_id)
-    r = requests.get(r_url)
-    path_list = re.findall("(hsa\d+\s{2}.*)", r.text)
-    for path in path_list:
-        path_id[path.split('  ')[0]] = path.split('  ')[1]
-    print("<td><div class='scroll'>")
-    for id in path_id:
-        url = "https://www.genome.jp/kegg-bin/show_pathway?{}".format(id)
-        print('<a href="{}">{}</a>{}'.format(url, id, path_id[id]))
-    print("</div></td>")
-
-
-kegg_id()
+        r_url = "http://rest.kegg.jp/get/{}".format(kegg_id)
+        r = requests.get(r_url)
+        pathway_list = re.findall("("+organism_id+"\d+\s{2}.*)",r.text)
+        output_file.write('<td><div class="scroll">')
+        if pathway_list != []:
+            for path in pathway_list :
+                path_id = path.split(' ')[0]
+                path_name = path.split('  ')[1]
+                link = f"https://www.genome.jp/dbget-bin/www_bget?{path_id}"
+                output_file.write(f"<a href={link}>{path_id}</a> {path_name}<br>")
+        else:
+            output_file.write('<i>No data found</i>')
+        output_file.write('</div></td>')
+    else:
+        output_file.write('<td><i>No data found</i></td>'*2)

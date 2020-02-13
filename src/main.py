@@ -7,6 +7,8 @@ from src.pdb import pdb
 from src.pfam import pfam
 from src.prot_string import string
 from src.ncbi import ncbi_gene_id, ncbi_rna_id, ncbi_prot_id
+from src.kegg import kegg
+from src.go import go
 
 
 def statut(txt, line_number, step):
@@ -27,7 +29,7 @@ def main(filename, txt):
         gene, organism = init_row(line, output_file)
         # NCBI
         statut(txt, line_number, ' NCBI...',)
-        ncbi_gene_id(gene, organism, output_file)
+        ncbi_main_id = ncbi_gene_id(gene, organism, output_file)
         ncbi_rna_id(gene, organism, output_file)
         ncbi_prot_id(gene, organism, output_file)
         # Ensembl
@@ -54,7 +56,14 @@ def main(filename, txt):
 
         statut(txt, line_number, ' Prosite...',)
         prosite(uniprot_id, output_file)
+
+        statut(txt, line_number, ' KEGG...',)
+        kegg(ncbi_main_id, output_file)
+
+        statut(txt, line_number, ' GO...',)
+        go(uniprot_id, output_file)
         # End
         output_file.write("</tr>")
         line_number += 1
-    end_table(output_file)
+
+    end_table(output_file, txt)
