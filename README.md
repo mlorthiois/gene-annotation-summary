@@ -1,7 +1,7 @@
 # Generate a HTML table from a txt file
 
 ## Required
-- Python 3
+- Python 3.6 or later
 - BioPython
 - TXT file that contain per line `genesymbol,organism`. Example:
 ```
