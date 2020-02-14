@@ -2,12 +2,6 @@ import webbrowser
 import os
 
 
-def read_file():
-    gene_file = open("ressources/GeneSymbols.txt", "r")
-    gene_content = gene_file.readlines()
-    return gene_content
-
-
 def init_table(output_file):
     with open("ressources/head.html", "r") as head_file:
         output_file.write(head_file.read())
@@ -26,6 +20,6 @@ def end_table(output_file, txt):
     with open("ressources/end.html", "r") as end_html:
         output_file.write(end_html.read())
     output_file.close()
-    txt.configure(foreground='green')
+    txt.configure(foreground='#114d74')
     print('Done')
-    webbrowser.open('file://' + os.path.realpath('output.html'))
+    webbrowser.open('file://' + os.path.realpath('Results.html'))

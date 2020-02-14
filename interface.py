@@ -22,7 +22,7 @@ def execute():
 
 
 def open_file():
-    webbrowser.open('file://' + os.path.realpath('output.html'))
+    webbrowser.open('file://' + os.path.realpath('Results.html'))
 
 # Constant
 window = Tk()

@@ -26,6 +26,9 @@ def ens_db(organism):
 
 
 def ens_id(gene, organism, output_file, ens_url):
+    if ens_url == "0":
+        output_file.write("<td><i>No data found</i></td>")
+        return
     server = "https://rest.ensembl.org"
     ext = f"/xrefs/symbol/{organism}/{gene}?"
     r = requests.get(server+ext, headers={"Content-Type": "application/json"})
@@ -52,6 +55,9 @@ def ens_id(gene, organism, output_file, ens_url):
 
 
 def ens_rna_prot(ens_ID, output_file, ens_url, organism):
+    if ens_url == "0":
+        output_file.write("<td><i>No data found</i></td>"*2)
+        return
     output_file.write('<td><div class="scroll">')
     dic = {}
     server = "https://rest.ensembl.org"
@@ -92,6 +98,9 @@ def ens_rna_prot(ens_ID, output_file, ens_url, organism):
 
 
 def ens_orthologs(ens_ID, organism, ens_url, output_file):
+    if ens_url == "0":
+        output_file.write("<td><i>No data found</i></td>")
+        return
     output_file.write('<td><div class="scroll">')
     for ID in ens_ID:
         if ens_ID != ["Not found"]:
