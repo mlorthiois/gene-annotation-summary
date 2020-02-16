@@ -20,6 +20,6 @@ def end_table(output_file, txt):
     with open("ressources/end.html", "r") as end_html:
         output_file.write(end_html.read())
     output_file.close()
-    txt.configure(foreground='#114d74')
+    txt.configure(foreground='green')
     print('Done')
     webbrowser.open('file://' + os.path.realpath('Results.html'))

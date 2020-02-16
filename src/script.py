@@ -11,22 +11,6 @@ from src.kegg import kegg
 from src.go import go
 
 
-def txt_done(txt, line_number):
-    if line_number > 1:
-        cursor = f"{line_number-1}.end"
-        txt.tag_config("Finish", foreground="green")
-        txt.insert(cursor, " Done", ('Finish'))
-        txt.update()
-
-
-def txt_statut(txt, line_number, step):
-    cursor = f"{line_number}.end"
-    txt.tag_config("Current", foreground="#E95420")
-    txt.insert(cursor, step, ('Current'))
-    txt.update()
-    txt.delete(f"{'Current'}.first", f"{'Current'}.last")
-
-
 def main(filename, txt):
     line_number = 1
     output_file = open("Results.html", "w")
@@ -73,3 +57,19 @@ def main(filename, txt):
         line_number += 1
     
     end_table(output_file, txt)
+
+
+def txt_done(txt, line_number):
+    if line_number > 1:
+        cursor = f"{line_number-1}.end"
+        txt.tag_config("Finish", foreground="green")
+        txt.insert(cursor, " Done", ('Finish'))
+        txt.update()
+
+
+def txt_statut(txt, line_number, step):
+    cursor = f"{line_number}.end"
+    txt.tag_config("Current", foreground="#E95420")
+    txt.insert(cursor, step, ('Current'))
+    txt.update()
+    txt.delete(f"{'Current'}.first", f"{'Current'}.last")
