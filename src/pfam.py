@@ -14,6 +14,6 @@ def pfam(uniprot_id, output_file):
             if match.attrib['accession'] not in pfam_id:
                 pfam_id.append(match.attrib['accession'])
     for ID in pfam_id:
-        output_file.write(
-            '<a href="https://pfam.xfam.org/family/{}">{}</a><br>'.format(ID, ID))
+        link = f"https://pfam.xfam.org/family/{ID}"
+        output_file.write(f'<a href="{link}">{ID}</a> : <a href="{link}#tabview=tab1">Graphical view</a><br>')
     output_file.write("</div></td>")
