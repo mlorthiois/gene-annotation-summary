@@ -1,6 +1,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-  <title>Projet M1 - Matthias Lorthiois</title>
+  <title>Results - Automatic Annotation Table</title>
 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.dataTables.min.css">
@@ -11,12 +11,11 @@
   <script type="text/javascript" class="init">
     $(document).ready( function () {
         $('#table_id').DataTable( {
-            "order": [[ 1, "asc" ]],
             "scrollY": 700,
             "scrollX": true,
             "lengthMenu": [ 6, 10, 15, 20, "All" ],
             fixedColumns:   {
-                leftColumns: 2
+                leftColumns: 1
             }
         } );
     } );
@@ -36,6 +35,7 @@
   }
   body {
     font-family : Helvetica, Arial, sans-serif;
+    margin: 0;
   }
   .dataTables_wrapper {
     width: 95%;
@@ -45,9 +45,12 @@
     border: 1px solid grey;
   }
   h1 {
-    margin-top: 30px;
+    display: inline-block;
+    padding-left: 2%;
+    padding-top: 26px;
     color: #114d74;
     text-align: center;
+    font-size: 28px;
   }
   table.dataTable thead th {
     border-bottom: 0;
@@ -64,15 +67,31 @@
   a {
     color: black;
   }
+  img {
+    padding-top: 5px;
+    float:left;
+    padding-left: 33%;
+    height: 110px;
+  }
+  .header {
+    background-color: #E8E8E8;
+    margin: 0 ;
+    height: 120px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
 </style>
 </head>
 
 <body>
-<h1>Output : Automatic Aggregation Table</h1>
+<div class="header">
+<img src="img/database.png">
+<h1>Results : Automatic Annotation Table</h1>
+</div>
 <table id="table_id" class="display nowrap cell-border" style="width:100%">
 <thead>
 <tr>
-  <th colspan="2">Query</th>
+  <th>Query</th>
   <th colspan="4">NCBI data</th>
   <th colspan="4">Ensembl data</th>
   <th colspan="2">Uniprot</th>
@@ -84,8 +103,7 @@
   <th colspan="3">GO</th>
 </tr>
 <tr>
-  <th>Gene Symbol</th>
-  <th>Organism</th>
+  <th>Gene / Organism</th>
   <th>Official gene name</th>
   <th>Gene ID</th>
   <th>RefSeq RNA ID</th>

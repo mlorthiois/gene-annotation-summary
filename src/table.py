@@ -23,8 +23,8 @@ def init_row(line, output_file):
     gene = colonne[0]
     organism = colonne[1].rstrip('\n')
     print(f"Traitement de {gene} / {organism}")
-    writ_org = organism.replace('_', ' ')
-    output_file.write(f"<tr><td>{gene}</td><td>{writ_org}</td>")
+    writ_org = organism.replace('_', ' ').capitalize()
+    output_file.write(f"<tr><td>{gene}<br><i>{writ_org}</i></td>")
     return gene, organism
 
 

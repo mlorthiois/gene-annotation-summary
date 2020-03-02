@@ -10,7 +10,7 @@ import os
 class Interface:
     def __init__(self):
         self.window = Tk()
-        self.window.title("Gene-Table Generator")
+        self.window.title("Automatic Annotation Table App")
         self.window.geometry("600x730")
 
         # Frame Initialization
@@ -31,7 +31,7 @@ class Interface:
 
     def header_widget(self):
         label_title = Label(self.frame_head,
-                            text="Gene Datatable Creator",
+                            text="Automatic Annotation Table",
                             font="Arial 24 bold",
                             fg="#114d74")
         label_title.pack(pady=15)
@@ -48,16 +48,17 @@ class Interface:
 
     def text_widget(self):
         label_title = Label(self.text_frame,
-                    text="Content of the request:",
-                    font="Arial 16")
+                            text="Content of the request:",
+                            font="Arial 16")
         label_title.pack()
 
         self.txt = Text(self.text_frame, height=12,
-                wrap=WORD,
-                fg="#1e1e1e",
-                background='#eff0f1',
-                font="Courier 13")
-        self.txt.insert('1.0', 'Required file format : <gene symbol>,<organism>')
+                        wrap=WORD,
+                        fg="#1e1e1e",
+                        background='#eff0f1',
+                        font="Courier 13")
+        self.txt.insert(
+            '1.0', 'Required file format : <gene symbol>,<organism>')
         self.txt.pack(fill=X, padx=20)
         self.text_frame.pack(pady=13)
 
@@ -72,36 +73,36 @@ class Interface:
         self.open_img = ImageTk.PhotoImage(self.img.resize((90, 90)))
 
         button_import = Button(self.icon_frame,
-                            text='1. Select a file',
-                            command=self.import_file,
-                            image=self.fileimport,
-                            compound=TOP,
-                            relief='flat')
+                               text='1. Select a file',
+                               command=self.import_file,
+                               image=self.fileimport,
+                               compound=TOP,
+                               relief='flat')
         button_import.grid(row=0, column=0, padx=5, pady=5)
 
         button_upload = Button(self.icon_frame,
-                            text='2. Start',
-                            image=self.cloud,
-                            command=self.execute,
-                            compound=TOP,
-                            highlightthickness=0,
-                            bd=0)
+                               text='2. Start',
+                               image=self.cloud,
+                               command=self.execute,
+                               compound=TOP,
+                               highlightthickness=0,
+                               bd=0)
         button_upload.grid(row=0, column=1, padx=5, pady=5)
 
         button_open = Button(self.icon_frame,
-                            text='3. Open table',
-                            image=self.open_img,
-                            command=self.open_file,
-                            compound=TOP,
-                            highlightthickness=0,
-                            bd=0)
+                             text='3. Open table',
+                             image=self.open_img,
+                             command=self.open_file,
+                             compound=TOP,
+                             highlightthickness=0,
+                             bd=0)
         button_open.grid(row=0, column=2, padx=5, pady=5)
         self.icon_frame.pack()
 
     def copyright_widget(self):
         foot_text = Label(self.copyright_frame,
-                        text="© Matthias Lorthiois - M1 Bioinformatique - Université Rouen-Normandie",
-                        font="Arial 11")
+                          text="Matthias Lorthiois - Master Bioinformatics - University Rouen-Normandy",
+                          font="Arial 11")
         foot_text.pack()
         self.copyright_frame.pack(pady=13)
 
