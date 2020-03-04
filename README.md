@@ -19,7 +19,7 @@ $ python3 app.py
 
 It will launch the interface :
 
-<img src="./img/ui.png" alt="ui" style="zoom:60%;" />
+<img src="./img/ui.png" | width=100 />
 
 In order :
 
